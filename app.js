@@ -13,25 +13,10 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 3000;
 
-// ✅ Correct allowed origins
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://recharge-hub-frontend.onrender.com",
-];
-
-// ✅ CORS CONFIG (CORRECT)
+// ✅ CORS CONFIG - Allow all origins for now
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow server-to-server / Postman
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
-      }
-    },
+    origin: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
